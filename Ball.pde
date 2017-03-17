@@ -50,11 +50,6 @@ class Ball {
     }
   }
 
-  // NOTE; There is a bug here that actucally makes the game quite fun!
-  // when the ball hits the top or bottom side of the paddle, since the (paddle) rebounce 
-  // is currently only supported on the x axis, the ball starts rebouncing along the paddle
-  // gaining speed and then is shooted at high speed sometimes towards the fields or else
-  // as a own-goal. A player could even try to use that "feature" but with dangerous effect!
   boolean collision (Paddle other) {
     // We know how to find if a circle hits a single point by showing that if the distance
     // between the center of the circle and the point is less than the circle's radius, then
