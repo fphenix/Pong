@@ -1,5 +1,6 @@
 // Fred L
 // 25/02/2017
+// fixed: 18/03/2017
 
 class Ball {
   PVector pos;
@@ -60,7 +61,8 @@ class Ball {
     // there is collision.
     // We therefore only need to find out which is the best (closest) point on the rectangle
     // perimeter and apply that rule on that point.
-    // So firstly, find the point on the rectangle (paddle) that is the closest from the circle (ball)
+    // So firstly, find the point on the rectangle (paddle) that is the closest from the 
+    // circle (ball)
     // Then check the distance from that point to the ball's center.
     float rectXmin = other.pos.x - (other.padW / 2);
     float rectXmax = rectXmin + other.padW;
@@ -73,6 +75,7 @@ class Ball {
   }
 
   void update (Paddle pL, Paddle pR) {
+    boolean collided = false;
     this.pos.add(this.vel);
     if (isGoalL()) {
       pR.score++;
@@ -83,7 +86,15 @@ class Ball {
       reset();
     }
     bounce();
-    if (collision(pL) || collision(pR)) {
+    if (collision(pL)) {
+      collided = true;
+      this.pos.x = (pL.pos.x + pL.padW + 1);
+    }
+    if (collision(pR)) {
+      collided = true;
+      this.pos.x = (pR.pos.x - pR.padW - 1);
+    }
+    if (collided) {
       this.vel.x = this.vel.x * (-1);
       this.vel.mult(this.accel);
       float jitter = random(-PI/20, PI/20);

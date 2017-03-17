@@ -69,7 +69,7 @@ class Paddle {
       this.pos.y = constrain(ty, ymin, ymax);
     }
   }
-  
+
   boolean iWin () {
     if (this.score >= this.scoreMax) {
       fill(255, 0, 64);
