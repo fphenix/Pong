@@ -18,6 +18,7 @@ class Paddle {
   float lose;
   float hsize = 150;
   float scoreMax;
+  boolean hit;
 
   Paddle (boolean tSide) {
     this.scoreMax = 10;
@@ -29,6 +30,7 @@ class Paddle {
     this.sideLeft = tSide;
     this.goUp = false;
     this.goDown = false;
+    this.hit = false;
     float xpos;
     float ypos = height/2;
     if (this.sideLeft) {
@@ -53,6 +55,14 @@ class Paddle {
     this.score = 0;
   }
 
+  void beenHit () {
+    this.hit = true;
+  }
+
+  void resetHit () {
+    this.hit = false;
+  }
+
   void update () {
     this.hratio = constrain((1 - (float(this.score) / 10)), 0.3, 1);
     this.padH = hsize * this.hratio;
@@ -74,10 +84,10 @@ class Paddle {
     if (this.score >= this.scoreMax) {
       fill(255, 0, 64);
       textSize(48);
-      //textMode(CENTER);
-      text("GAGNANT!!", (this.midX-120), height/2);
+      textAlign(CENTER);
+      text("GAGNANT! :)", this.midX, height/2);
       fill(127);
-      text("LOSER!!", (this.lose-120), height/2);
+      text("LOSER!!! xD", this.lose, height/2);
       return true;
     } else {
       return false;
@@ -89,10 +99,16 @@ class Paddle {
     textSize(16);
     text(this.keyUp, this.pos.x, 20);
     text(this.keyDown, this.pos.x, height-20);
-    fill(127);
-    stroke(255);
+    if (this.hit) {
+      fill(255, 0, 0);
+      stroke(255, 0, 0);
+    } else {
+      fill(127);
+      stroke(255);
+    }
     strokeWeight(3);
     rectMode(CENTER);
     rect(this.pos.x, this.pos.y, this.padW, this.padH, 5);
+    this.resetHit();
   }
 }

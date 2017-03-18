@@ -83,10 +83,12 @@ class Ball {
     bounce();
     if (collision(pL)) {
       collided = true;
+      pL.beenHit();
       this.pos.x = (pL.pos.x + pL.padW + 1);
     }
     if (collision(pR)) {
       collided = true;
+      pR.beenHit();
       this.pos.x = (pR.pos.x - pR.padW - 1);
     }
     if (collided) {

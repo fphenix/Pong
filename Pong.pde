@@ -25,6 +25,7 @@ void setup () {
 void draw () {
   background(0);
   field.show();
+  field.dstart(!onOff);
   ball.show();
   padL.show();
   padR.show();
@@ -43,14 +44,14 @@ void draw () {
     ball.update(padL, padR);
     padL.update();
     padR.update();
-  } 
+  }
 }
 
 void keyPressed () {
   if (key == ' ') {
     onOff = !onOff;
   }
-  
+
   if (key == padL.keyUp) {
     padL.goUp = true;
   }

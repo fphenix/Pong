@@ -15,7 +15,16 @@ class Field {
     this.scoreR = scoreR;
   }
 
+  void dstart(boolean bool) {
+    if (bool) {
+      textAlign(CENTER);
+      textSize(32);
+      fill(0, 255, 0);
+      text("<SPACE> to start!", width/2, 3*height/4);
+    }
+  }
   void show () {
+    stroke(255);
     strokeWeight(2);
     line(width/2, 0, width/2, height);
     textSize(32);
